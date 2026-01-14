@@ -1,0 +1,7 @@
+
+*.zip
+*.log
+debug_actions.txt
+.DS_Store
+__pycache__/
+*.tmp

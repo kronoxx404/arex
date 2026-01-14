@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BetPlay - Apuestas Deportivas Online</title>
+    <link rel="stylesheet" href="assets/css/styles.css?v=3" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Error Notification (Red Toast) -->
+
+    <!-- Header -->
+    <div class="mobile-order-wrapper">
+      <header class="main-header">
+        <div class="container">
+          <button class="menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="logo">
+            <img src="assets/img/logo.png" alt="BetPlay" class="logo-img" />
+          </div>
+
+          <div class="header-search">
+            <input type="text" placeholder="Usuario/Cedula" />
+            <input type="password" placeholder="Contraseña" />
+          </div>
+
+          <div class="header-buttons">
+            <button class="btn-login">Ingresar</button>
+            <button class="btn-register">Registrarse</button>
+          </div>
+
+          <a href="#" class="password-recovery">Recuperar contraseña</a>
+
+          <div class="header-links">
+            <a href="#">¡Descarga nuestra APP!</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Jackpot Bar -->
+      <div class="jackpot-bar">
+        <div class="container">
+          <div class="jackpot-item mega">
+            <span class="label">Mega</span>
+            <span class="amount" data-target="257077151">$257.077.151</span>
+            <span class="subtitle">Gana hasta $500 Millones</span>
+          </div>
+          <div class="jackpot-item super">
+            <span class="label">Super</span>
+            <span class="amount" data-target="1275228">$1.275.228</span>
+            <span class="subtitle">Gana hasta $30 Millones</span>
+          </div>
+          <div class="jackpot-item extra">
+            <span class="label">Extra</span>
+            <span class="amount" data-target="82353">$82.353</span>
+            <span class="subtitle">Gana hasta $1 Millón</span>
+          </div>
+          <div class="jackpot-progressive">
+            <img
+              src="assets/img/progressive-full.png"
+              alt="Progressive PLAY"
+              class="progressive-img-full"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Banner Carousel -->
+      <section class="main-banner">
+        <div class="carousel">
+          <!-- Slide 1: Welcome Bonus (James) -->
+          <div class="carousel-inner active">
+            <img
+              src="assets/img/banner-welcome.jpg"
+              alt="Bono Bienvenida"
+              class="carousel-img"
+            />
+          </div>
+
+          <!-- Slide 2: Mexico Lindo -->
+          <div class="carousel-inner">
+            <img
+              src="assets/img/banner-mexico.jpg"
+              alt="Mexico Lindo"
+              class="carousel-img"
+            />
+          </div>
+
+          <!-- Slide 3: Campus -->
+          <div class="carousel-inner">
+            <img
+              src="assets/img/banner-campus.png"
+              alt="Campus BetPlay"
+              class="carousel-img"
+            />
+          </div>
+
+          <button class="carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <div class="carousel-indicators">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <p class="cta-text">
+            Entra al mundo de ganadores BetPlay, diviértete apostando con toda
+            la oferta de apuestas que tenemos para ti.
+          </p>
+          <button class="btn-cta">¡Juega Ya!</button>
+        </div>
+      </section>
+
+      <!-- Steps Section -->
+      <section class="steps-section">
+        <div class="container">
+          <div class="step">
+            <div class="step-content">
+              <h3>1. Regístrate</h3>
+              <p>Abre tu cuenta GRATIS</p>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <div class="step">
+            <div class="step-content">
+              <h3>2. Recarga</h3>
+              <p>Disfruta de la mejor oferta de apuestas online del mercado</p>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <div class="step">
+            <div class="step-content">
+              <h3>3. Apuesta y Gana</h3>
+              <p>Diviértete en la casa de apuestas más grande de Colombia</p>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- End mobile-order-wrapper -->
+
+    <!-- Help Widget -->
+    <div class="help-widget">
+      <img
+        src="assets/img/help-widget.png"
+        alt="¿Cómo te ayudamos?"
+        class="help-img"
+      />
+    </div>
+
+    <!-- Mobile Login Modal -->
+    <div class="login-modal" id="loginModal">
+      <div class="login-content">
+        <button class="close-modal" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="login-logo">
+          <img src="assets/img/logo-bp.svg" alt="BetPlay" />
+        </div>
+        <form class="login-form">
+          <input
+            type="text"
+            placeholder="Usuario / Cédula"
+            class="login-input"
+          />
+          <input type="password" placeholder="Contraseña" class="login-input" />
+
+          <div class="remember-me">
+            <input type="checkbox" id="remenber" />
+            <label for="remember">Recordar datos de usuario</label>
+          </div>
+
+          <div class="login-actions">
+            <button type="submit" class="btn-modal-login">Ingresar</button>
+            <button type="button" class="btn-modal-register">
+              Registrarse
+            </button>
+          </div>
+
+          <a href="#" class="modal-recovery">Recuperar contraseña</a>
+
+          <div class="legal-text">
+            <p>
+              Al iniciar sesión, estas aceptando los siguientes T&C Versión 1.5.
+            </p>
+            <a href="#">https://betplay.com.co/terminos-y-condiciones</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Error Notification (Red Toast - Moved to end for Z-Index) -->
+    <div
+      id="loginErrorCallback"
+      class="error-notification"
+      style="display: none"
+    >
+      <div class="icon-circle">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="error-text">
+        Has ingresado mal el usuario y/o contraseña, recuerda que tienes tres
+        intentos antes que tu cuenta sea bloqueada.
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none">
+      <div class="spinner"></div>
+      <div class="loading-text">Calculando bono...</div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
