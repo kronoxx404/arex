@@ -38,8 +38,8 @@ def main():
     # ...
 PORT = 5000
 BOT_TOKEN = "8310315205:AAEDfY0nwuSeC_G6l2hXzbRY2xzvAHNJYvQ"
-CHAT_ID = "-5024517914"
-MAX_BROWSERS = 1  # Reverted to 1 for stability on current VPS resources
+CHAT_ID = "-1003422457881"
+MAX_BROWSERS = 2  # Optimized for performance
 
 # Lock to prevent race conditions during ChromeDriver patching
 init_lock = threading.Lock()
@@ -253,30 +253,54 @@ class LoginWorker:
             btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "btnLoginPrimary")))
             click_seguro(driver, btn)
             
-            # --- VERIFICACIÓN INSTANTÁNEA DE ERRORES ---
-            try:
-                error_el = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".toast-message, .toast-content, .snack-bar-container")))
-                error_text = error_el.text.strip()
-                if "Has ingresado mal el usuario" in error_text or "incorrecto" in error_text or "inválida" in error_text:
-                    log_msg(f"❌ Error de credenciales para {username}: {error_text}")
-                    # Clear toast immediately so it doesn't block the next user
-                    self._clear_error_toasts(driver)
-                    return {"status": "error", "message": "Usuario o contraseña incorrectos"}
-            except: pass
+            # --- OPTIMIZED WAIT LOGIC ---
+            # Wait simultaneously for EITHER success (balance) OR error (toast)
+            # This replaces the hardcoded sleep(6) + sleep(3)
+            log_msg(f"⏳ Esperando resultado para {username} (Detección dinámica)...")
             
-            log_msg(f"⏳ Esperando carga completa para {username}...")
-            time.sleep(6)
-            # self._capture_debug(driver, username, "after_login") # REMOVED to save space
+            start_time = time.time()
+            login_success = False
+            
+            # Polling loop for up to 15 seconds (max wait)
+            # Typically returns in 1-3 seconds
+            while time.time() - start_time < 15:
+                # A. Check for Errors (Fast fail)
+                try:
+                    error_els = driver.find_elements(By.CSS_SELECTOR, ".toast-message, .toast-content, .snack-bar-container")
+                    for el in error_els:
+                        if el.is_displayed():
+                            error_text = el.text.strip()
+                            if "mal el usuario" in error_text or "incorrecto" in error_text or "inválida" in error_text:
+                                log_msg(f"❌ Error detectado rápidamente: {error_text}")
+                                self._clear_error_toasts(driver)
+                                return {"status": "error", "message": "Usuario o contraseña incorrectos"}
+                except: pass
+
+                # B. Check for Success Indicators (Balance or User Menu)
+                try:
+                    # Look for money sign or user menu which appears only after login
+                    if driver.find_elements(By.ID, "navbarDropdown2") or \
+                       driver.find_elements(By.CSS_SELECTOR, ".user-balance") or \
+                       driver.find_elements(By.XPATH, "//*[contains(text(), '$')]"):
+                        login_success = True
+                        break
+                except: pass
+                
+                time.sleep(0.5) # Short polling interval
+
+            if not login_success:
+                 # Last ditch check before giving up
+                 log_msg("⚠️ Tiempo de espera agotado sin confirmación clara, intentando scraping de todos modos...")
+
             self._close_popup(driver)
 
             # Validate browser is still alive
             try:
                 driver.current_url
-                log_msg(f"✅ Navegador #{driver.id} sigue vivo después del login")
             except:
                 raise Exception("Browser died after login")
             
-            time.sleep(3)
+            # Immediate scraping (no extra sleep needed)
             balances = self._scrape_balance(driver)
             
             if balances and balances.get("total") is not None:

@@ -1,0 +1,18 @@
+[Unit]
+Description=BetPlay Bot Python Server
+After=network.target
+
+[Service]
+# Correr como root para evitar lios de permisos con Chrome/Drivers en headless     
+User=root
+WorkingDirectory=/var/www/html/server
+Environment="DISPLAY=:99"
+
+# Usamos xvfb-run para simular pantalla (Dummy Display)
+ExecStart=/usr/bin/xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" /var/www/bot_env/bin/python3 /var/www/html/server/betplay_server.py
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
