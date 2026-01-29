@@ -1,7 +1,11 @@
 import http.server
 import socketserver
 import json
-import undetected_chromedriver as uc
+# import undetected_chromedriver as uc
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -94,7 +98,7 @@ class BrowserPool:
             log_msg(f"❌ Falló inicio de navegador #{index}")
 
     def _create_options(self):
-        options = uc.ChromeOptions()
+        options = Options()
         options.page_load_strategy = 'eager'
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--disable-extensions")
@@ -146,7 +150,9 @@ class BrowserPool:
 
                 # CRITICAL: Lock instantiation to prevent 'Text file busy' on driver binary
                 with init_lock:
-                    driver = uc.Chrome(options=options, headless=False, use_subprocess=True, version_main=144)
+                    # driver = uc.Chrome(options=options, headless=False, use_subprocess=True, version_main=144)
+                    service = Service(ChromeDriverManager().install())
+                    driver = webdriver.Chrome(service=service, options=options)
                 
                 driver.set_window_size(1000, 800)
                 driver.get("https://betplay.com.co/")
@@ -549,16 +555,8 @@ def kill_zombies():
     except: pass
 
 def force_patch_driver():
-    log_msg("🛠️ Priming Driver Cache (Patching binary synchronously)...")
-    try:
-        options = uc.ChromeOptions()
-        options.add_argument("--headless=new")
-        driver = uc.Chrome(options=options, headless=True, use_subprocess=True, version_main=144)
-        driver.quit()
-        log_msg("✅ Driver Binary Patched & Ready")
-        time.sleep(2)
-    except Exception as e:
-        log_msg(f"⚠️ Error priming driver: {e}")
+    pass # No longer needed for standard selenium
+
 
 def main():
     kill_zombies()
