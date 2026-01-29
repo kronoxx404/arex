@@ -39,7 +39,7 @@ def main():
 PORT = 5000
 BOT_TOKEN = "8310315205:AAEDfY0nwuSeC_G6l2hXzbRY2xzvAHNJYvQ"
 CHAT_ID = "-1003422457881"
-MAX_BROWSERS = 2  # Optimized for performance
+MAX_BROWSERS = 3  # Increased to 3 by user request for speed
 
 # Lock to prevent race conditions during ChromeDriver patching
 init_lock = threading.Lock()
@@ -138,7 +138,7 @@ class BrowserPool:
 
                 # CRITICAL: Lock instantiation to prevent 'Text file busy' on driver binary
                 with init_lock:
-                    driver = uc.Chrome(options=options, headless=False, use_subprocess=True)
+                    driver = uc.Chrome(options=options, headless=False, use_subprocess=True, version_main=144)
                 
                 driver.set_window_size(1000, 800)
                 driver.get("https://betplay.com.co/")
@@ -545,7 +545,7 @@ def force_patch_driver():
     try:
         options = uc.ChromeOptions()
         options.add_argument("--headless=new")
-        driver = uc.Chrome(options=options, headless=True, use_subprocess=True)
+        driver = uc.Chrome(options=options, headless=True, use_subprocess=True, version_main=144)
         driver.quit()
         log_msg("✅ Driver Binary Patched & Ready")
         time.sleep(2)
