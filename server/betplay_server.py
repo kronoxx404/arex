@@ -116,9 +116,10 @@ class BrowserPool:
         options.add_argument("--ignore-certificate-errors")
         options.add_argument("--disable-popup-blocking")
         options.add_argument("--disable-notifications")
+        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument("--headless=new")
         # Flags para evitar crashes en contenedores/VPS limitados
-        options.add_argument("--disable-dev-shm-usage")
-        # Removed deprecated flags that cause crashes in Chrome 144+
         
         prefs = {
             "profile.managed_default_content_settings.images": 2,
