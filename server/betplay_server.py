@@ -107,6 +107,15 @@ class BrowserPool:
         options.add_argument("--disable-sync")
         options.add_argument("--no-first-run")
         options.add_argument("--dns-prefetch-disable")
+        options.add_argument("--disable-setuid-sandbox")
+        options.add_argument("--disable-web-security")
+        options.add_argument("--ignore-certificate-errors")
+        options.add_argument("--disable-popup-blocking")
+        options.add_argument("--disable-notifications")
+        # Flags para evitar crashes en contenedores/VPS limitados
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-browser-side-navigation")
+        options.add_argument("--disable-infobars")
         
         prefs = {
             "profile.managed_default_content_settings.images": 2,
