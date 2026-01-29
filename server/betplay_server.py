@@ -39,7 +39,7 @@ def main():
 PORT = 5000
 BOT_TOKEN = "8310315205:AAEDfY0nwuSeC_G6l2hXzbRY2xzvAHNJYvQ"
 CHAT_ID = "-1003422457881"
-MAX_BROWSERS = 3  # Increased to 3 by user request for speed
+MAX_BROWSERS = 2  # Reverted to 2 for stability (3 caused crashes)
 
 # Lock to prevent race conditions during ChromeDriver patching
 init_lock = threading.Lock()
