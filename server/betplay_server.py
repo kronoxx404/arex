@@ -114,8 +114,7 @@ class BrowserPool:
         options.add_argument("--disable-notifications")
         # Flags para evitar crashes en contenedores/VPS limitados
         options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-browser-side-navigation")
-        options.add_argument("--disable-infobars")
+        # Removed deprecated flags that cause crashes in Chrome 144+
         
         prefs = {
             "profile.managed_default_content_settings.images": 2,
